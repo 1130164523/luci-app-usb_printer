@@ -45,7 +45,7 @@ check_printer() {
 	pid_file=/var/run/p910${port}d.pid
 	[ -f $pid_file ] && kill `cat $pid_file` 2>/dev/null
 
-	if [ "$ACTION" = "add" ]; then
+	if [ "$ACTION" = "add" ] || [ "$ACTION" = "bind" ]; then
 		if [ "$bidirect" != 0 ]; then
 			args='-b'
 		fi
@@ -60,7 +60,7 @@ if [ -z "$PRODUCT" ] || [ -z "$ACTION" ]; then
 	exit 1
 fi
 
-if [ "$ACTION" != "add" ] && [ "$ACTION" != "remove" ]; then
+if [ "$ACTION" != "add" ] && [ "$ACTION" != "remove" ] && [ "$ACTION" != "bind" ] ; then
 	echo "Invalid action arguement"
 	exit 1
 fi
